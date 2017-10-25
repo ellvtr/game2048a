@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="dist/build.css">
+  <link href="amadev/style.css" rel="stylesheet">
+  <title>2048</title>
+</head>
+<body>
+  <h1>2048</h1>
+  <p id="score"></p>
+  <div id="size-bloc">
+    <p id="size-title">Size : </p>
+    <input id="size" type="number" value="4">
+    <input id="change-size" type="button" value="Ok">
+    <div class="clear"></div>
+  </div>
+  <div id="canvas-block">
+    <canvas id="canvas" width="500" height="500"></canvas>
+  </div>
+  <div id="ui"></div>
+  <script src="dist/build.js"></script>
+</body>
+</html>
