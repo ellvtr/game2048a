@@ -1,5 +1,7 @@
 <script>
 const cl = console.log; cl;
+// http://seiyria.com/bootstrap-slider/ - https://github.com/seiyria/bootstrap-slider
+const Slider = require("bootstrap-slider");
 
 module.exports = {
   name: "game-ui"
@@ -17,7 +19,7 @@ module.exports = {
   ,watch: {
     gameSize(nv,ov){
       nv > 20 ? this.gameSize = 20 : void 0;
-      // cl('gameSize,nv,ov',nv,ov);
+      nv < 2 ? this.gameSize = 2 : void 0;
       this.amadev.setSize(nv);
     }
   }
@@ -32,6 +34,17 @@ module.exports = {
   ,beforeMount(){
     this.amadev = global.amadev;
   }
+  ,mounted(){
+    // Create a slider and attach event listener:
+    const slr = new Slider("#slr1", {
+      formatter: function(value) {
+        return 'Game size: ' + value;
+      }
+    });
+    slr.on("change", o=>{
+      this.gameSize = o.newValue;
+    });
+  } // mounted
 };
 
 </script>
@@ -45,23 +58,21 @@ module.exports = {
 <div class="row">
 
   <div class="col col-md-4">
-    <!-- <p>Score: {{score}}</p> -->
+
     <div class="panel panel-primary panel-score">
-      <div class="panel-heading">
-        <h3 class="panel-title">Score</h3>
-      </div>
       <div class="panel-body">
-        {{score}}
+        Score: {{score}}
       </div>
     </div>
 
-    <div class="input-group">
-      <div class="input-group-addon">[2-20]</div>
-      <input type="number" class="form-control" placeholder="Game size"
-        @change.stop="void 0;"
-        v-model.number="gameSize" />
+    <div class="form-group">
+    <label for="slr1" class="block">Game size:</label>
+    <input id="slr1" data-slider-id='slr1a' type="number"
+      data-slider-min="2" data-slider-max="20" 
+      data-slider-step="1" :data-slider-value="gameSize"/> <br/>
     </div>
-    <button @click="startGame()" class="btn btn-primary">New game</button>
+
+    <button @click="startGame()" class="btn btn-primary btn-lg">New game</button>
   </div> <!-- col -->
 
   <div class="col col-md-8">
@@ -70,8 +81,17 @@ module.exports = {
     <!-- </div> -->
   </div> <!-- col -->
 
+  <!-- <pre>{{gameSize}}</pre> -->
+
 </div> <!-- row -->
 </div> <!-- container -->
+
+<!--     <div class="input-group">
+      <div class="input-group-addon">[2-20]</div>
+      <input type="number" class="form-control" placeholder="Game size"
+        @change.stop="void 0;"
+        v-model.number="gameSize" />
+    </div> -->
 
 </template>
 
@@ -97,8 +117,14 @@ module.exports = {
   margin-top: 2rem;
 }
 .panel-score {
-  width: 12rem;
-  /*margin-left: auto;*/
-  /*margin-right: auto;*/
+  width: 20rem;
+  background: #337ab7;
+  color: #fff;
+  font-weight: bold;
+  font-size: 200%;
+  text-align: center;
+}
+.block {
+  display: block;
 }
 </style>
