@@ -55,6 +55,8 @@ class App {
   }
 
   setSize(size){
+    size > 12 ? size = 12 : void 0;
+    size < 2 ? size = 2 : void 0;
     this.size = size;
     this.width = this.canvas.width / this.size - 6;
     this.canvasClean();
