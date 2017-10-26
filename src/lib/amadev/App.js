@@ -1,33 +1,25 @@
 const cl = console.log; cl;
-// const $ = require("jquery");
+const $ = global.$;
 const document = global.document;
 const Cell = require("./Cell");
 
 class App {
   constructor(){
-    this.canvas = document.getElementById('canvas');
-    this.ctx = this.canvas.getContext('2d');
-    this.sizeInput = document.getElementById('size');
-    this.changeSize = document.getElementById('change-size');
-    this.scoreLabel = document.getElementById('score');
     this.score = 0;
     this.size = 4;
-    this.width = this.canvas.width / this.size - 6;
     this.cells = [];
     this.fontSize;
     this.loss = false;
-    this.startGame();
 
-    this.changeSize.onclick = function(){
-      if (this.sizeInput.value >= 2 && this.sizeInput.value <= 20) {
-        this.size = this.sizeInput.value;
-        this.width = this.canvas.width / this.size - 6;
-        this.canvasClean();
-        this.startGame();
-      }
-    }.bind(this);
+  } // constructor
 
-    document.onkeydown = function(event){
+  render(){
+    // props:
+    this.canvas = document.getElementById('canvas');
+    this.ctx = this.canvas.getContext('2d');
+    this.width = this.canvas.width / this.size - 6;
+    // event handler
+    $(document).on("keydown", function(event){
       if (!this.loss) {
         if (event.keyCode === 38 || event.keyCode === 87) {
           this.moveUp(); 
@@ -38,21 +30,35 @@ class App {
         } else if (event.keyCode === 37 || event.keyCode === 65) {
           this.moveLeft(); 
         }
-        this.scoreLabel.innerHTML = 'Score : ' + this.score;
       }
-    }.bind(this); 
+    }.bind(this) );
 
-  } // constructor
+  } // render
 
   canvasClean(){
     this.ctx.clearRect(0, 0, 500, 500);
   }
 
+  resetGame(){
+    this.score = 0;
+    this.loss = false;
+    this.canvas.style.opacity = '1';
+    this.canvasClean();
+  }
+
   startGame(){
+    this.resetGame();
     this.createCells();
     this.drawAllCells();
     this.pasteNewCell();
     this.pasteNewCell();
+  }
+
+  setSize(size){
+    this.size = size;
+    this.width = this.canvas.width / this.size - 6;
+    this.canvasClean();
+    this.startGame();
   }
 
   finishGame(){
@@ -66,7 +72,6 @@ class App {
       this.cells[i] = [];
       for(j = 0; j < this.size; j++) {
         this.cells[i][j] = new Cell(i, j, this);
-        // var cell = this.cells[i][j] = new Cell(i, j, this);
       }
     }
   }
@@ -84,7 +89,7 @@ class App {
     this.ctx.beginPath();
     this.ctx.rect(cell.x, cell.y, this.width, this.width);
     switch (cell.value){
-      case 0 : this.ctx.fillStyle = '#A9A9A9'; break;
+      case 0 : this.ctx.fillStyle = '#efefef'; break;
       case 2 : this.ctx.fillStyle = '#D2691E'; break;
       case 4 : this.ctx.fillStyle = '#FF7F50'; break;
       case 8 : this.ctx.fillStyle = '#ffbf00'; break;
