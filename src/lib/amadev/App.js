@@ -115,25 +115,26 @@ class App {
   drawCell(cell){
     this.ctx.beginPath();
     this.ctx.rect(cell.x, cell.y, this.width, this.width);
+    // New colours based on http://colorbrewer2.org/
     switch (cell.value){
-      case 0 : this.ctx.fillStyle = '#efefef'; break;
-      case 2 : this.ctx.fillStyle = '#D2691E'; break;
-      case 4 : this.ctx.fillStyle = '#FF7F50'; break;
-      case 8 : this.ctx.fillStyle = '#ffbf00'; break;
-      case 16 : this.ctx.fillStyle = '#bfff00'; break;
-      case 32 : this.ctx.fillStyle = '#40ff00'; break;
-      case 64 : this.ctx.fillStyle = '#00bfff'; break;
-      case 128 : this.ctx.fillStyle = '#FF7F50'; break;
-      case 256 : this.ctx.fillStyle = '#0040ff'; break;
-      case 512 : this.ctx.fillStyle = '#ff0080'; break;
-      case 1024 : this.ctx.fillStyle = '#D2691E'; break;
-      case 2048 : this.ctx.fillStyle = '#FF7F50'; break;
-      case 4096 : this.ctx.fillStyle = '#ffbf00'; break;
-      default : this.ctx.fillStyle = '#ff0080';
+      case 0 : this.ctx.fillStyle =    '#eeeeee'; break;
+      case 2 : this.ctx.fillStyle =    '#a6cee3'; break;
+      case 4 : this.ctx.fillStyle =    '#1f78b4'; break;
+      case 8 : this.ctx.fillStyle =    '#b2df8a'; break;
+      case 16 : this.ctx.fillStyle =   '#33a02c'; break;
+      case 32 : this.ctx.fillStyle =   '#fb9a99'; break;
+      case 64 : this.ctx.fillStyle =   '#e31a1c'; break;
+      case 128 : this.ctx.fillStyle =  '#fdbf6f'; break;
+      case 256 : this.ctx.fillStyle =  '#ff7f00'; break;
+      case 512 : this.ctx.fillStyle =  '#cab2d6'; break;
+      case 1024 : this.ctx.fillStyle = '#6a3d9a'; break;
+      case 2048 : this.ctx.fillStyle = '#ffff99'; break;
+      case 4096 : this.ctx.fillStyle = '#b15928'; break;
+      default : this.ctx.fillStyle =   '#666666';
     }
     this.ctx.fill();
     if (cell.value) {
-      this.fontSize = this.width/2;
+      this.fontSize = this.width/2.4;
       this.ctx.font = this.fontSize + 'px Arial';
       this.ctx.fillStyle = 'white';
       this.ctx.textAlign = 'center';
