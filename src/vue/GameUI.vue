@@ -35,9 +35,6 @@ module.exports = {
     startGame(){
       this.amadev.startGame();
     }
-    ,log(){
-      cl(arguments)
-    }
   }
   ,beforeMount(){
     this.amadev = global.amadev;

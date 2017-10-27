@@ -1,4 +1,5 @@
 const cl = console.log; cl; // Shorthand, avoid lint error using 'cl' once
+// http://hammerjs.github.io/api/ - https://www.npmjs.com/package/hammerjs
 const Hammer = require("hammerjs");
 
 const $ = global.$;
@@ -15,9 +16,10 @@ class App {
     this.loss = false;
   } // constructor
 
-  render(){
+  render(id){
     // props:
-    this.canvas = document.getElementById('canvas');
+    this.canvas = document.getElementById(id || "canvas");
+    if(!this.canvas){ throw new Error("amadev/App.render: No canvas element for id=" + id); }
     this.ctx = this.canvas.getContext('2d');
     this.width = this.canvas.width / this.size - 6;
     // event handler for arrow key events:

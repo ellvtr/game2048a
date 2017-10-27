@@ -5,7 +5,7 @@ const Vue = require("vue");
 const gameUI = require("./vue/GameUI.vue");
 
 const Amadev = require("./lib/amadev");
-global.amadev = new Amadev();
+const amadev = global.amadev = new Amadev();
 global.gameUI = gameUI;
 
 new Vue({ 
@@ -13,5 +13,5 @@ new Vue({
   render: (h) => h(gameUI)
 });
 
-amadev.render();
+amadev.render("canvas");
 amadev.startGame();
