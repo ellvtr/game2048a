@@ -83,7 +83,7 @@ module.exports = {
       data-slider-step="1" :data-slider-value="gameSize"/> <br/>
     </div>
 
-    <button @click="startGame()" class="btn btn-primary btn-lg">New game</button>
+    <button @click="startGame()" class="btn btn-primary btn-lg startGame">New game</button>
   </div> <!-- col -->
 
   <div class="col col-md-8" id="gameCol">
@@ -100,7 +100,7 @@ module.exports = {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 v-if="loss" class="modal-title">Game over!</h4>
+        <h4 v-if="loss" class="modal-title">Game over!!</h4>
         <h4 v-if="score === 2048" class="modal-title">You made it!</h4>
       </div>
       <div class="modal-body">
@@ -140,7 +140,7 @@ module.exports = {
   background: #fff;
   border: 1px solid #ccc;
 }
-.btn {
+.btn.startGame {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
