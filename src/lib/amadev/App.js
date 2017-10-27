@@ -68,7 +68,6 @@ class App {
     this.createCells();
     this.drawAllCells();
     this.pasteNewCell();
-    this.pasteNewCell();
   }
 
   innerWidth(){
