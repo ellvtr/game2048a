@@ -1,5 +1,5 @@
 <script>
-const cl = console.log; cl;
+const cl = console.log; cl; // Shorthand, avoid lint error using 'cl' once
 const $ = global.$;
 // http://seiyria.com/bootstrap-slider/ - https://github.com/seiyria/bootstrap-slider
 const Slider = require("bootstrap-slider");

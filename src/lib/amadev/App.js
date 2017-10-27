@@ -1,6 +1,9 @@
-const cl = console.log; cl;
+const cl = console.log; cl; // Shorthand, avoid lint error using 'cl' once
+const Hammer = require("hammerjs");
+
 const $ = global.$;
 const document = global.document;
+
 const Cell = require("./Cell");
 
 class App {
@@ -10,7 +13,6 @@ class App {
     this.cells = [];
     this.fontSize;
     this.loss = false;
-
   } // constructor
 
   render(){
@@ -18,7 +20,7 @@ class App {
     this.canvas = document.getElementById('canvas');
     this.ctx = this.canvas.getContext('2d');
     this.width = this.canvas.width / this.size - 6;
-    // event handler
+    // event handler for arrow key events:
     $(document).on("keydown", function(event){
       if (!this.loss) {
         if (event.keyCode === 38 || event.keyCode === 87) {
@@ -32,6 +34,23 @@ class App {
         }
       }
     }.bind(this) );
+    // event handler for swipe events:
+    const hmr = new Hammer(this.canvas);
+    hmr.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+    hmr.on("swipe", e=>{
+      switch(e.offsetDirection){
+        case 2:
+          this.moveLeft(); break;
+        case 4:
+          this.moveRight(); break;
+        case 8:
+          this.moveUp(); break;
+        case 16:
+          this.moveDown(); break;
+        default:
+          cl("Amadev 2048 swipe; no case match for: " + e.offsetDirection);
+      }
+    });
 
   } // render
 

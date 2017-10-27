@@ -1,4 +1,4 @@
-const cl = console.log; cl;
+const cl = console.log; cl; // Shorthand, avoid lint error using 'cl' once
 // const $ = require("jquery");
 // global.$ = global.jQuery = $;
 const Vue = require("vue");
