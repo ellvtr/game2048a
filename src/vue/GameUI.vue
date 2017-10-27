@@ -10,6 +10,7 @@ module.exports = {
     return {
        amadev: null
       ,gameSize: 4
+      ,gameAvailablePx: 200
     };
   }
   ,computed: {
@@ -37,6 +38,10 @@ module.exports = {
     }
   }
   ,beforeMount(){
+    // Set canvas size to fit screen size:
+    const w = $(window).innerWidth() - 30;
+    this.gameAvailablePx = w > 500 ? 500 : w;
+    // Set amadev instance:
     this.amadev = global.amadev;
   }
   ,mounted(){
@@ -81,13 +86,11 @@ module.exports = {
     <button @click="startGame()" class="btn btn-primary btn-lg">New game</button>
   </div> <!-- col -->
 
-  <div class="col col-md-8">
-    <!-- <div class="pane"> -->
-    <canvas id="canvas" width="500" height="500"></canvas>
-    <!-- </div> -->
+  <div class="col col-md-8" id="gameCol">
+    <canvas id="canvas" :width="gameAvailablePx" :height="gameAvailablePx"></canvas>
   </div> <!-- col -->
 
-  <!-- <pre>{{gameSize}}</pre> -->
+  <!-- <pre>{{gameAvailablePx}}</pre> -->
 
 </div> <!-- row -->
 </div> <!-- container -->
@@ -112,12 +115,14 @@ module.exports = {
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<!--     <div class="input-group">
+<!-- Regular input:
+    <div class="input-group">
       <div class="input-group-addon">[2-20]</div>
       <input type="number" class="form-control" placeholder="Game size"
         @change.stop="void 0;"
         v-model.number="gameSize" />
-    </div> -->
+    </div>
+ -->
 
 </span></template>
 
@@ -131,21 +136,23 @@ module.exports = {
 .jumbotron h1 {
   text-align: center;
 }
-/*.pane {
-  border: 1px solid #ccc;
-  padding: 1rem;
-}*/
 #canvas {
   background: #fff;
   border: 1px solid #ccc;
 }
 .btn {
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .panel-score {
   width: 20rem;
-  background: #337ab7;
-  color: #fff;
+  background: #fff;
+  /*background: #337ab7;*/
+  border-color: #337ab7;
+  border-width: 0.4rem;
+  border-radius: 0.8rem;
+  color: #337ab7;
+  /*color: #fff;*/
   font-weight: bold;
   font-size: 200%;
   text-align: center;

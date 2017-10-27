@@ -21,7 +21,7 @@ class App {
     this.canvas = document.getElementById(id || "canvas");
     if(!this.canvas){ throw new Error("amadev/App.render: No canvas element for id=" + id); }
     this.ctx = this.canvas.getContext('2d');
-    this.width = this.canvas.width / this.size - 6;
+    this.adjustCellWidth();
     // event handler for arrow key events:
     $(document).on("keydown", function(event){
       if (!this.loss) {
@@ -41,14 +41,10 @@ class App {
     hmr.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     hmr.on("swipe", e=>{
       switch(e.offsetDirection){
-        case 2:
-          this.moveLeft(); break;
-        case 4:
-          this.moveRight(); break;
-        case 8:
-          this.moveUp(); break;
-        case 16:
-          this.moveDown(); break;
+        case 2: this.moveLeft(); break;
+        case 4: this.moveRight(); break;
+        case 8: this.moveUp(); break;
+        case 16: this.moveDown(); break;
         default:
           cl("Amadev 2048 swipe; no case match for: " + e.offsetDirection);
       }
@@ -75,11 +71,19 @@ class App {
     this.pasteNewCell();
   }
 
+  innerWidth(){
+    return $("#canvas").innerWidth();
+  }
+
+  adjustCellWidth(){
+    this.width = this.innerWidth() / this.size - 6;
+  }
+
   setSize(size){
     size > 12 ? size = 12 : void 0;
     size < 2 ? size = 2 : void 0;
     this.size = size;
-    this.width = this.canvas.width / this.size - 6;
+    this.adjustCellWidth();
     this.canvasClean();
     this.startGame();
   }
