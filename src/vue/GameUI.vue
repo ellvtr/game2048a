@@ -15,7 +15,7 @@ module.exports = {
   }
   ,computed: {
     score(){
-      return this.amadev ? this.amadev.score : "&nbsp;";
+      return this.amadev ? this.amadev.score : "";
     }
     ,loss(){
       return this.amadev ? this.amadev.loss : null ;
