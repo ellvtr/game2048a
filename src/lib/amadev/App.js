@@ -22,18 +22,20 @@ class App {
     if(!this.canvas){ throw new Error("amadev/App.render: No canvas element for id=" + id); }
     this.ctx = this.canvas.getContext('2d');
     this.adjustCellWidth();
+    // IMPROVE: Move event handlers below to GameUI.vue
+    // and don't attach to document element.
     // event handler for arrow key events:
     $(document).on("keydown", function(event){
-      event.preventDefault(); 
+      const pd = a=>{ event.preventDefault(); }
       if (!this.loss) {
         if (event.keyCode === 38 || event.keyCode === 87) {
-          this.moveUp(); 
+          this.moveUp(); pd();
         } else if (event.keyCode === 39 || event.keyCode === 68) {
-          this.moveRight();
+          this.moveRight(); pd();
         } else if (event.keyCode === 40 || event.keyCode === 83) {
-          this.moveDown(); 
+          this.moveDown(); pd();
         } else if (event.keyCode === 37 || event.keyCode === 65) {
-          this.moveLeft(); 
+          this.moveLeft(); pd();
         }
       }
     }.bind(this) );
