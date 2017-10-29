@@ -7,15 +7,27 @@ You will find the original script in `src/lib/amadev/original.script`.
 The amadev code is rewritten to be object oriented 
 classes within a module - with added functionality.
 
-[VueJS](https://vuejs.org/) is used to create the UI around the game.
+Uses [VueJS](https://vuejs.org/) to create the UI around the game.
 
-## Quick start:
+## Quick start
+### Live Demo
+Try it here:
+https://ellvtr.github.io/game2048a/
+
+### Run locally
 Requires [NodeJS](https://nodejs.org/en/), install if you don't have it.
-Clone this repo. Then in a terminal, go to this repo directory and type:
+Then clone this repo. In a terminal, go to this repo directory and type:
 ```bash
 npm install --production
 npm run serve
 ```
 
-And the app will run by default on http://localhost:8080/
+If you prefer docker, run this docker image:
+```bash
+docker run --name game2048 -d -p 8080:8080 ellvtr/game2048a
+# Or with this script:
+./run_docker.sh
+```
+
+The app will run by default on http://localhost:8080/
 
