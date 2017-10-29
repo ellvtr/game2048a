@@ -24,6 +24,7 @@ class App {
     this.adjustCellWidth();
     // event handler for arrow key events:
     $(document).on("keydown", function(event){
+      event.preventDefault(); 
       if (!this.loss) {
         if (event.keyCode === 38 || event.keyCode === 87) {
           this.moveUp(); 
@@ -83,7 +84,6 @@ class App {
     size < 2 ? size = 2 : void 0;
     this.size = size;
     this.adjustCellWidth();
-    this.canvasClean();
     this.startGame();
   }
 

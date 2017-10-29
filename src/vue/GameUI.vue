@@ -139,6 +139,7 @@ module.exports = {
 #canvas {
   background: #fff;
   border: 1px solid #ccc;
+  margin-bottom: 4rem;
 }
 .btn.startGame {
   margin-top: 2rem;
