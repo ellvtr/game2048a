@@ -42,6 +42,7 @@ module.exports = {
   }
   ,methods: {
     startGame(){
+      this.reached2048 = false;
       this.amadev.startGame();
     }
   }
