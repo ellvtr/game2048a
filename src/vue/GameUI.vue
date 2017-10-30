@@ -11,6 +11,8 @@ module.exports = {
        amadev: null
       ,gameSize: 4
       ,gameAvailablePx: 200
+      ,maxCellValue: null
+      ,reached2048: false
     };
   }
   ,computed: {
@@ -26,10 +28,16 @@ module.exports = {
       this.amadev.setSize(nv);
     }
     ,loss(nv,ov){
+      // Notify when game is lost:
       nv===true ? $("#gameModal").modal("show") : void 0;
     }
     ,score(nv,ov){
-      nv===2048 ? $("#gameModal").modal("show") : void 0;
+      // Congrats if a cell is 2048, but only first time:
+      this.maxCellValue = this.amadev.getMaxCellValue();
+      if(!this.reached2048 && this.maxCellValue === 2048){
+        this.reached2048 = true;
+        $("#gameModal").modal("show");
+      }
     }
   }
   ,methods: {
@@ -101,14 +109,14 @@ module.exports = {
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 v-if="loss" class="modal-title">Game over!!</h4>
-        <h4 v-if="score === 2048" class="modal-title">You made it!</h4>
+        <h4 v-if="maxCellValue === 2048" class="modal-title">You made it!</h4>
       </div>
       <div class="modal-body">
         <p>Score: {{score}}</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-default" data-dismiss="modal">Close</button>
-        <button @click="startGame()" v-if="score!==2048"
+        <button @click="startGame()" v-if="maxCellValue!==2048"
           class="btn btn-primary" data-dismiss="modal">New game</button>
       </div>
     </div><!-- /.modal-content -->

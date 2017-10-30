@@ -94,6 +94,21 @@ class App {
     this.loss = true;
   }
 
+  getCellValues(){
+    const arr = [];
+    this.cells.forEach(row=>{
+      row.forEach(cell=>{
+        arr.push(cell.value);
+      });
+    });
+    return arr;
+  }
+
+  getMaxCellValue(){
+    const arr = this.getCellValues();
+    return Math.max.apply(null, arr);
+  }
+
   createCells(){
     var i, j;
     for(i = 0; i < this.size; i++) {
